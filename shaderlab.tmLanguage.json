@@ -35,7 +35,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.shaderlab",
-					"match": "[#]?\\b(if|while|for|return|inline|in|inout|out|elif|endif|else|define|undef|defined|ifndef|ifdef|static|const|LINE)\\b"
+					"match": "[#]?\\b(if|while|for|return|inline|in|inout|out|elif|endif|else|define|undef|defined|ifndef|ifdef|static|const|LINE|line|pragma|include)\\b"
 				},
 				{
 					"name": "keyword.other.shaderlab",
@@ -128,7 +128,7 @@
 			"patterns": [
 				{
 					"name": "support.function.macos.shaderlab",
-					"match": "\\b(UNITY_VERTEX_INPUT_INSTANCE_ID|UNITY_VERTEX_OUTPUT_STEREO)\\b"
+					"match": "\\b(UNITY_VERTEX_INPUT_INSTANCE_ID|UNITY_VERTEX_OUTPUT_STEREO|TANGENT_SPACE_ROTATION)\\b"
 				},
 				{
 					"name": "support.variable.transformations.shaderlab",
@@ -180,7 +180,7 @@
 				},
 				{
 					"name": "support.class.surface.shaderlab",
-					"match": "\\b(SurfaceOutputStandardSpecular|SurfaceOutputStandard|SurfaceOutput|UnityLight|UnityGI|UnityGIInput|UnityStandardData|UnityTessellationFactors|UnityMetaInput|UnityStandardData|Input)\\b"
+					"match": "\\b(SurfaceOutputStandardSpecular|SurfaceOutputStandard|SurfaceOutput|UnityLight|UnityGI|UnityGIInput|UnityStandardData|UnityTessellationFactors|UnityMetaInput|UnityStandardData|Input|FragmentCommonData)\\b"
 				},
 				{
 					"name": "storage.type.structure.shaderlab",

@@ -50,12 +50,17 @@
 			"patterns": [
 				{
 					"name": "storage.type.structure.shaderlab",
-					"match": ",(\\s*?)\\b(?i:Range|Float|Int|Color|Vector|2D|3D|Cube|Any)\\b"
+					"match": "(?<=,)(\\s*?)\\b(?i:Range|Float|Int|Color|Vector|2D|3D|Cube|Any)\\b"
 				}
 			]
 		},
 		"types": {
-			"patterns": [
+			"patterns": 
+			[
+				{
+					"name": "support.class.structures.shaderlab",
+					"match": "\\b(?<=struct)\\s+?\\w+\\b"
+				},
 				{
 					"name": "keyword.other.shaderlab",
 					"match": "\\b(?i:uniform|struct|sampler|sampler2D|sampler3D|samplerCUBE|string|triangle|triangleadj|vector|((float|int|uint|bool|half|fixed|double)(\\d*?|\\d*?x\\d*?)))\\b"
@@ -135,8 +140,8 @@
 			"patterns": 
 			[
 				{
-					"name": "support.variable.swizzle.shaderlab",
-					"match": "(?:\\.)(xyz)"
+					"name": "support.variable.subObj.shaderlab",
+					"match": "(?<=\\.)(\\w+)(?=(\\b|.))"
 				}
 			]
 		},
@@ -145,10 +150,6 @@
 				{
 					"name": "support.function.macos.shaderlab",
 					"match": "\\b(CBUFFER_START|CBUFFER_END|GLOBAL_CBUFFER_START|GLOBAL_CBUFFER_END|UNITY_VERTEX_INPUT_INSTANCE_ID|UNITY_VERTEX_OUTPUT_STEREO|TANGENT_SPACE_ROTATION)\\b"
-				},
-				{
-					"name": "support.variable.others.hlsl.shaderlab",
-					"match": "\\b(xxxxxxxxxxxxxxxxxxxxxxxxxxxx)\\b"
 				},
 				{
 					"name": "support.variable.transformations.shaderlab",
@@ -223,6 +224,10 @@
 					"match": "\\b(Name|Tags|Fallback|CustomEditor|Cull|ZWrite|ZTest|Offset|Blend|BlendOp|ColorMask|AlphaToMask|LOD|Lighting|Stencil|Ref|ReadMask|WriteMask|Comp|CompBack|CompFront|Fail|ZFail|UsePass|GrabPass|Dependency|Material|Fog|Mode|Density|SeparateSpecular|SetTexture|Combine|ConstantColor|Matrix|AlphaTest|ColorMaterial|BindChannels|Bind)\\b"
 				},
 				{
+					"name": "keyword.other.pragma.shaderlab",
+					"match": "(?<=#pragma)\\s+(vertex|fragment|shader_feature|multi_compile)\\b"
+				},
+				{
 					"name": "support.constant.property-value.shaderlab",
 					"match": "\\b(?i:Back|Front|On|Off|AmbientAndDiffuse)\\b"
 				},
@@ -244,7 +249,7 @@
 				},
 				{
 					"name": "support.constant.property-value.bindchannels.shaderlab",
-					"match": ":(\\s*?)\\b(?i:Vertex|Normal|Vector|Tangent|TexCoord(\\d?)|SV_POSITION|POSITION|SV_TARGET|SV_CULLDISTANCE|SV_TessFactor|SV_InsideTessFactor|Color(\\d?))\\b"
+					"match": "(?<=:)(\\s*?)\\b(?i:Vertex|Normal|Vector|Tangent|TexCoord(\\d?)|SV_POSITION|POSITION|SV_TARGET|SV_CULLDISTANCE|SV_TessFactor|SV_InsideTessFactor|Color(\\d?))\\b"
 				},
 				{
 					"name": "support.constant.property-value.blendoperations.shaderlab",

@@ -38,11 +38,11 @@
 			"patterns": [
 				{
 					"name": "keyword.control.shaderlab",
-					"match": "[#]?\\b(if|while|for|return|inline|in|inout|out|elif|endif|else|define|undef|defined|ifndef|ifdef|static|const|LINE|line|pragma|include)\\b"
+					"match": "[#]?\\b(if|while|for|return|continue|inline|in|inout|out|elif|endif|else|define|undef|defined|ifndef|ifdef|static|const|LINE|line|pragma|include)\\b"
 				},
 				{
 					"name": "keyword.other.shaderlab",
-					"match": "\\b(?i:Shader|SubShader|Tags|Fallback|Properties|Pass|CGPROGRAM|ENDCG|CGINCLUDE|HLSLPROGRAM|ENDHLSL|HLSLINCLUDE)\\b"
+					"match": "\\b(?i:Shader|SubShader|Tags|Fallback|Properties|Pass|CGPROGRAM|ENDCG|CGINCLUDE|HLSLPROGRAM|ENDHLSL|HLSLINCLUDE|GLSLPROGRAM|ENDGLSL|GLSLINCLUDE)\\b"
 				}
 			]
 		},
@@ -63,7 +63,7 @@
 				},
 				{
 					"name": "keyword.other.shaderlab",
-					"match": "\\b(?i:uniform|struct|sampler|sampler2D|sampler3D|samplerCUBE|string|triangle|triangleadj|vector|((float|int|uint|bool|half|fixed|double)(\\d*?|\\d*?x\\d*?)))\\b"
+					"match": "\\b(?i:uniform|struct|sampler|sampler2D|sampler3D|Texture2D|Texture3D|SamplerState|samplerCUBE|string|triangle|triangleadj|vector|((float|int|uint|bool|half|fixed|double)(\\d*?|\\d*?x\\d*?)))\\b"
 				},
 				{
 					"name": "keyword.other.LWRP.hlsl.shaderlab",
@@ -119,7 +119,7 @@
 			"patterns": [
 				{
 					"name": "constant.numeric.shaderlab",
-					"match": "\\b([0-9]+\\.?[0-9]*)\\b"
+					"match": "\\b([0-9]+\\.?[0-9]*[Ff]?)\\b"
 				}
 			]
 		},
@@ -150,6 +150,10 @@
 				{
 					"name": "support.function.macos.shaderlab",
 					"match": "\\b(CBUFFER_START|CBUFFER_END|GLOBAL_CBUFFER_START|GLOBAL_CBUFFER_END|UNITY_VERTEX_INPUT_INSTANCE_ID|UNITY_VERTEX_OUTPUT_STEREO|TANGENT_SPACE_ROTATION)\\b"
+				},
+				{
+					"name": "support.variable.others.hlsl.shaderlab",
+					"match": "\\b(xxxxxxxxxxxxxxxxxxxxxxxxxxxx)\\b"
 				},
 				{
 					"name": "support.variable.transformations.shaderlab",
@@ -204,6 +208,10 @@
 					"match": "\\b(UNITY_PASS_FORWARDBASE|UNITY_PASS_FORWARDADD|UNITY_PASS_DEFERRED|UNITY_PASS_SHADOWCASTER|UNITY_PASS_PREPASSBASE|UNITY_PASS_PREPASSFINAL)\\b"
 				},
 				{
+					"name": "support.variable.attribuate.shaderlab",
+					"match": "(?<=\\[)(None|HideInInspector|Toggle|ToggleOff|PerRendererData|NoScaleOffset|Normal|HDR|Gamma|NonModifiableTextureData)(?=\\])"
+				},
+				{
 					"name": "support.class.structures.shaderlab",
 					"match": "\\b(appdata_base|appdata_tan|appdata_full|appdata_img|v2f_img)\\b"
 				},
@@ -225,7 +233,7 @@
 				},
 				{
 					"name": "keyword.other.pragma.shaderlab",
-					"match": "(?<=#pragma)\\s+(vertex|fragment|shader_feature|multi_compile)\\b"
+					"match": "(?<=#pragma)\\s+(vertex|fragment|shader_feature|multi_compile|prefer_hlslcc|skip_variants|exclude_renderers|target)\\b"
 				},
 				{
 					"name": "support.constant.property-value.shaderlab",

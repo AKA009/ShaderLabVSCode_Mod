@@ -58,16 +58,24 @@
 			"patterns": 
 			[
 				{
-					"name": "support.class.structures.shaderlab",
-					"match": "\\b(?<=struct)\\s+?\\w+\\b"
-				},
-				{
 					"name": "keyword.other.shaderlab",
 					"match": "\\b(?i:uniform|struct|sampler|sampler2D|sampler3D|Texture2D|Texture3D|SamplerState|samplerCUBE|string|triangle|triangleadj|vector|((float|int|uint|bool|half|fixed|double)(\\d*?|\\d*?x\\d*?)))\\b"
 				},
 				{
 					"name": "keyword.other.LWRP.hlsl.shaderlab",
 					"match": "\\b(?i:((real|void)(\\d*?|\\d*?x\\d*?)))\\b"
+				},
+				{
+					"name": "meta.type.shaderlab",
+					"match": "(?xi: (?<=struct)\\s*?\\b(\\w+)\\b | \\b(\\w+)\\b(?=\\s+\\b) | (?<=\\()\\b(\\w+)\\b(?=\\)\\s*?\\b) | \\b(\\w+)\\b\\s*?(?=<) | (?<=<)\\s*?\\b(\\w+)\\b\\s*?(?=>) )",
+					"captures":
+					{
+						"1": { "name": "entity.name.type.structures.shaderlab" },
+						"2": { "name": "entity.name.type.structures.shaderlab" },
+						"3": { "name": "entity.name.type.cast.shaderlab" },
+						"4": { "name": "entity.name.type.generic.shaderlab" },
+						"5": { "name": "entity.name.type.structures.shaderlab" }
+					}
 				}
 			]
 		},
@@ -127,10 +135,10 @@
 			"patterns": [
 				{
 					"match": "\\b([A-Za-z0-9_]*)\\b[ \\t]*\\(",
-					"name": "meta.method.shaderlab",
+					"name": "meta.function.shaderlab",
 					"captures": {
 						"1": {
-							"name": "support.function.shaderlab"
+							"name": "entity.name.function.shaderlab"
 						}
 					}
 				}
@@ -140,7 +148,7 @@
 			"patterns": 
 			[
 				{
-					"name": "support.variable.subObj.shaderlab",
+					"name": "entity.name.variable.subObj.shaderlab",
 					"match": "(?<=\\.)(\\w+)(?=(\\b|.))"
 				}
 			]
@@ -212,22 +220,6 @@
 					"match": "(?<=\\[)(None|HideInInspector|Toggle|ToggleOff|PerRendererData|NoScaleOffset|Normal|HDR|Gamma|NonModifiableTextureData)(?=\\])"
 				},
 				{
-					"name": "support.class.structures.shaderlab",
-					"match": "\\b(appdata_base|appdata_tan|appdata_full|appdata_img|appdata_t|v2f_img)\\b"
-				},
-				{
-					"name": "support.class.geometry.shaderlab",
-					"match": "\\b(point|line|triangle|lineadj|triangleadj|PointStream|LineStream|TriangleStream)\\b"
-				},
-				{
-					"name": "support.class.structures.LWRP.hlsl.shaderlab",
-					"match": "\\b(VertexPositionInputs|VertexNormalInputs)\\b"
-				},
-				{
-					"name": "support.class.surface.shaderlab",
-					"match": "\\b(SurfaceOutputStandardSpecular|SurfaceOutputStandard|SurfaceOutput|UnityLight|UnityGI|UnityGIInput|UnityStandardData|UnityTessellationFactors|UnityMetaInput|UnityStandardData|Input|FragmentCommonData|Unity_GlossyEnvironmentData)\\b"
-				},
-				{
 					"name": "storage.type.structure.shaderlab",
 					"match": "\\b(?i:Shader|Properties|SubShader|Pass|Category)\\b"
 				},
@@ -270,10 +262,6 @@
 				{
 					"name": "support.constant.property-value.blendfactors.shaderlab",
 					"match": "\\b(?i:One|Zero|SrcColor|SrcAlpha|DstColor|DstAlpha|OneMinusSrcColor|OneMinusSrcAlpha|OneMinusDstColor|OneMinusDstAlpha)\\b"
-				},
-				{
-					"name": "support.class.structures.tempS3.shaderlab",
-					"match": "\\b(Varyings|Attributes|SurfaceData|InputData|BRDFData|v2f|appdata)\\b"
 				}
 			]
 		}

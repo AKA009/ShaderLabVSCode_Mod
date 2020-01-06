@@ -149,7 +149,7 @@
 			"patterns": [
 				{
 					"name": "support.function.macos.shaderlab",
-					"match": "\\b(CBUFFER_START|CBUFFER_END|GLOBAL_CBUFFER_START|GLOBAL_CBUFFER_END|UNITY_VERTEX_INPUT_INSTANCE_ID|UNITY_VERTEX_OUTPUT_STEREO|TANGENT_SPACE_ROTATION)\\b"
+					"match": "\\b(CBUFFER_START|CBUFFER_END|GLOBAL_CBUFFER_START|GLOBAL_CBUFFER_END|UNITY_VERTEX_INPUT_INSTANCE_ID|UNITY_VERTEX_OUTPUT_STEREO|V2F_SHADOW_CASTER_NOPOS|TANGENT_SPACE_ROTATION)\\b"
 				},
 				{
 					"name": "support.variable.others.hlsl.shaderlab",
@@ -213,7 +213,11 @@
 				},
 				{
 					"name": "support.class.structures.shaderlab",
-					"match": "\\b(appdata_base|appdata_tan|appdata_full|appdata_img|v2f_img)\\b"
+					"match": "\\b(appdata_base|appdata_tan|appdata_full|appdata_img|appdata_t|v2f_img)\\b"
+				},
+				{
+					"name": "support.class.geometry.shaderlab",
+					"match": "\\b(point|line|triangle|lineadj|triangleadj|PointStream|LineStream|TriangleStream)\\b"
 				},
 				{
 					"name": "support.class.structures.LWRP.hlsl.shaderlab",
@@ -231,9 +235,9 @@
 					"name": "keyword.other.shaderlab",
 					"match": "\\b(Name|Tags|Fallback|CustomEditor|Cull|ZWrite|ZTest|Offset|Blend|BlendOp|ColorMask|AlphaToMask|LOD|Lighting|Stencil|Ref|ReadMask|WriteMask|Comp|CompBack|CompFront|Fail|ZFail|UsePass|GrabPass|Dependency|Material|Fog|Mode|Density|SeparateSpecular|SetTexture|Combine|ConstantColor|Matrix|AlphaTest|ColorMaterial|BindChannels|Bind)\\b"
 				},
-				{
+				{	
 					"name": "keyword.other.pragma.shaderlab",
-					"match": "(?<=#pragma)\\s+(vertex|fragment|shader_feature|multi_compile|prefer_hlslcc|skip_variants|exclude_renderers|target)\\b"
+					"match": "(?<=#pragma)\\s+(vertex|geometry|fragment|shader_feature|multi_compile|prefer_hlslcc|skip_variants|exclude_renderers|target)\\b"
 				},
 				{
 					"name": "support.constant.property-value.shaderlab",
@@ -266,6 +270,10 @@
 				{
 					"name": "support.constant.property-value.blendfactors.shaderlab",
 					"match": "\\b(?i:One|Zero|SrcColor|SrcAlpha|DstColor|DstAlpha|OneMinusSrcColor|OneMinusSrcAlpha|OneMinusDstColor|OneMinusDstAlpha)\\b"
+				},
+				{
+					"name": "support.class.structures.tempS3.shaderlab",
+					"match": "\\b(Varyings|Attributes|SurfaceData|InputData|BRDFData|v2f|appdata)\\b"
 				}
 			]
 		}

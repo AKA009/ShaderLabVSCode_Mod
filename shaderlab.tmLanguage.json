@@ -1,44 +1,27 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Shaderlab",
-	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		},
-		{
-			"include": "#numbers"
-		},
-		{
-			"include": "#unity"
-		},
-		{
-			"include": "#types"
-		},
-		{
-			"include": "#comments"
-		},
-		{
-			"include": "#properties"
-		},
-		{
-			"include": "#macosOrPragma"
-		},
-		{
-			"include": "#functions"
-		},
-		{
-			"include": "#variable"
-		}
+	"patterns": 
+	[
+		{ "include": "#keywords" },
+		{ "include": "#strings" },
+		{ "include": "#numbers" },
+		{ "include": "#pragmaOrInclude" },
+		{ "include": "#macosDefine" },
+		{ "include": "#renderSetup" },
+		{ "include": "#unity" },
+		{ "include": "#types" },
+		{ "include": "#comments" },
+		{ "include": "#properties" },
+		{ "include": "#functions" },
+		{ "include": "#variable" }
 	],
 	"repository": {
 		"keywords": {
 			"patterns": [
 				{
 					"name": "keyword.control.shaderlab",
-					"match": "[#]?\\b(if|while|for|return|continue|inline|in|inout|out|elif|endif|else|define|undef|defined|ifndef|ifdef|static|const|LINE|line|pragma|include)\\b"
+					"match": "[#]?\\b(if|while|for|return|continue|inline|in|inout|out|elif|endif|else|defined|ifndef|ifdef|static|const|LINE|line)\\b"
 				},
 				{
 					"name": "keyword.other.shaderlab",
@@ -55,7 +38,7 @@
 			]
 		},
 		"types": {
-			"patterns": 
+			"patterns":
 			[
 				{
 					"name": "keyword.other.shaderlab",
@@ -114,12 +97,120 @@
 				}
 			]
 		},
-		"macosOrPragma": {
-			"patterns": [
+		"pragmaOrInclude":
+		{
+			"patterns":
+			[
 				{
-					"name": "keyword.other.shaderlab",
-					"begin": "#(\\s*?)(?i:pragma|include)",
-					"end": "$"
+					"name": "meta.other.pragma.shaderlab",
+					"begin": "#\\s*(?i:pragma|include)",
+					"end": "$",
+					"beginCaptures":
+					{
+						"0": {"name": "keyword.control.pragma.shaderlab"}
+					},
+					"patterns":
+					[
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#numbers"
+						},
+						{
+							"name": "keyword.other.pragma.shaderlab",
+							"match": "\\b(vertex|geometry|fragment|surface|shader_feature|shader_feature_local|multi_compile|multi_compile_local|prefer_hlslcc|skip_variants|exclude_renderers|target)\\b"
+						},
+						{
+							"name": "support.variable.pragma.shaderlab",
+							"match": "\\b(multi_compile_fwdbase|multi_compile_fog|multi_compile_instancing|multi_compile_shadowcaster|multi_compile_prepassfinal|multi_compile_fwdadd_fullshadows)\\b"
+						},
+						{
+							"name": "other.pragma.shaderlab",
+							"match": "\\b(\\w+)\\b"
+						}
+					]
+				}
+			]
+		},
+		"macosDefine":
+		{
+			"patterns":
+			[
+				{
+					"name": "meta.macosDefine.shaderlab",
+					"match": "(#\\s*(?i:define|undef))\\s+\\b(\\w+)\\b",
+					"captures":
+					{
+						"1": { "name": "keyword.control.pragma.shaderlab" },
+						"2": { "name": "entity.name.macos.shaderlab" }
+					}
+				}
+			]
+		},
+		"renderSetup":
+		{
+			"patterns":
+			[
+				{
+					"name": "meta.renderSetup.shaderlab",
+					"begin": "\\b(?i:Cull|ZTest|ZWrite|Offset|Blend|BlendOp|AlphaToMask|ColorMask|Lighting|Stencil|Ref|ReadMask|WriteMask|Comp|CompBack|CompFront|Fail|ZFail|UsePass|GrabPass|Dependency)\\b",
+					"end": "$",
+					"beginCaptures":
+					{
+						"0": {"name": "keyword.renderSetup.shaderlab"}
+					},
+					"patterns":
+					[
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#numbers"
+						},
+						{
+							"name": "keyword.renderSetup.shaderlab",
+							"match": "\\b(?i:Cull|ZTest|ZWrite|Offset|Blend|BlendOp|AlphaToMask|ColorMask|Lighting|Stencil|Ref|ReadMask|WriteMask|Comp|CompBack|CompFront|Fail|ZFail|UsePass|GrabPass|Dependency|Material|Fog|Mode|Density|SeparateSpecular|SetTexture|Combine|ConstantColor|Matrix|AlphaTest|ColorMaterial|BindChannels|Bind|Color)\\b"
+						},
+						{
+							"name": "support.constant.property-value.shaderlab",
+							"match": "\\b(?i:Back|Front|On|Off|AmbientAndDiffuse)\\b"
+						},
+						{
+							"name": "support.constant.property-value.comparisonfunction.shaderlab",
+							"match": "\\b(?i:Less|Greater|LEqual|GEqual|Equal|NotEqual|Always|Never)\\b"
+						},
+						{
+							"name": "support.constant.property-value.stenciloperation.shaderlab",
+							"match": "\\b(?i:Keep|Zero|Replace|IncrSat|DecrSat|Invert|IncrWrap|DecrWrap)\\b"
+						},
+						{
+							"name": "support.constant.property-value.texturecombiners.shaderlab",
+							"match": "\\b(?i:Previous|Primary|Texture|Constant|Lerp|Double|Quad)\\b"
+						},
+						{
+							"name": "support.constant.property-value.fog.shaderlab",
+							"match": "\\b(?i:Global|Linear|Exp2|Exp)\\b"
+						},
+						{
+							"name": "support.constant.property-value.blendoperations.shaderlab",
+							"match": "\\b(?i:Add|Sub|RevSub|Min|Max|LogicalClear|LogicalSet|LogicalCopyInverted|LogicalCopy|LogicalNoop|LogicalInvert|LogicalAnd|LogicalNand|LogicalOr|LogicalNor|LogicalXor|LogicalEquiv|LogicalAndReverse|LogicalAndInverted|LogicalOrReverse|LogicalOrInverted)\\b"
+						},
+						{
+							"name": "support.constant.property-value.blendfactors.shaderlab",
+							"match": "\\b(?i:One|Zero|SrcColor|SrcAlpha|DstColor|DstAlpha|OneMinusSrcColor|OneMinusSrcAlpha|OneMinusDstColor|OneMinusDstAlpha)\\b"
+						},
+						{
+							"name": "support.constant.property-value.colorMask.shaderlab",
+							"match": "\\b(?i:R|G|B|A|0)+\\b"
+						}
+					]
 				}
 			]
 		},
@@ -145,10 +236,10 @@
 			]
 		},
 		"variable": {
-			"patterns": 
+			"patterns":
 			[
 				{
-					"name": "entity.name.variable.subObj.shaderlab",
+					"name": "variable.subObj.shaderlab",
 					"match": "(?<=\\.)(\\w+)(?=(\\b|.))"
 				}
 			]
@@ -225,44 +316,18 @@
 				},
 				{
 					"name": "keyword.other.shaderlab",
-					"match": "\\b(Name|Tags|Fallback|CustomEditor|Cull|ZWrite|ZTest|Offset|Blend|BlendOp|ColorMask|AlphaToMask|LOD|Lighting|Stencil|Ref|ReadMask|WriteMask|Comp|CompBack|CompFront|Fail|ZFail|UsePass|GrabPass|Dependency|Material|Fog|Mode|Density|SeparateSpecular|SetTexture|Combine|ConstantColor|Matrix|AlphaTest|ColorMaterial|BindChannels|Bind)\\b"
-				},
-				{	
-					"name": "keyword.other.pragma.shaderlab",
-					"match": "(?<=#pragma)\\s+(vertex|geometry|fragment|shader_feature|multi_compile|prefer_hlslcc|skip_variants|exclude_renderers|target)\\b"
+					"match": "\\b(Name|Tags|Fallback|CustomEditor|LOD|Ref|UsePass|GrabPass|Dependency|Material|Fog|Mode|Density|SeparateSpecular|SetTexture|Combine|ConstantColor|Matrix|AlphaTest|ColorMaterial|BindChannels|Bind|discard)\\b"
 				},
 				{
-					"name": "support.constant.property-value.shaderlab",
-					"match": "\\b(?i:Back|Front|On|Off|AmbientAndDiffuse)\\b"
+					"name": "keyword.value.shaderlab",
+					"match": "\\b(true|false)\\b"
 				},
+				
 				{
-					"name": "support.constant.property-value.comparisonfunction.shaderlab",
-					"match": "\\b(?i:Less|Greater|LEqual|GEqual|Equal|NotEqual|Always|Never)\\b"
-				},
-				{
-					"name": "support.constant.property-value.stenciloperation.shaderlab",
-					"match": "\\b(?i:Keep|Zero|Replace|IncrSat|DecrSat|Invert|IncrWrap|DecrWrap)\\b"
-				},
-				{
-					"name": "support.constant.property-value.texturecombiners.shaderlab",
-					"match": "\\b(?i:Previous|Primary|Texture|Constant|Lerp|Double|Quad)\\b"
-				},
-				{
-					"name": "support.constant.property-value.fog.shaderlab",
-					"match": "\\b(?i:Global|Linear|Exp2|Exp)\\b"
-				},
-				{
-					"name": "support.constant.property-value.bindchannels.shaderlab",
+					"name": "support.constant.property-value.semantic.shaderlab",
 					"match": "(?<=:)(\\s*?)\\b(?i:Vertex|Normal|Vector|Tangent|TexCoord(\\d?)|SV_POSITION|POSITION|SV_TARGET|SV_CULLDISTANCE|SV_TessFactor|SV_InsideTessFactor|Color(\\d?))\\b"
-				},
-				{
-					"name": "support.constant.property-value.blendoperations.shaderlab",
-					"match": "\\b(?i:Add|Sub|RevSub|Min|Max|LogicalClear|LogicalSet|LogicalCopyInverted|LogicalCopy|LogicalNoop|LogicalInvert|LogicalAnd|LogicalNand|LogicalOr|LogicalNor|LogicalXor|LogicalEquiv|LogicalAndReverse|LogicalAndInverted|LogicalOrReverse|LogicalOrInverted)\\b"
-				},
-				{
-					"name": "support.constant.property-value.blendfactors.shaderlab",
-					"match": "\\b(?i:One|Zero|SrcColor|SrcAlpha|DstColor|DstAlpha|OneMinusSrcColor|OneMinusSrcAlpha|OneMinusDstColor|OneMinusDstAlpha)\\b"
 				}
+				
 			]
 		}
 	},
